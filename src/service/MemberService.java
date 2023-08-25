@@ -101,24 +101,20 @@ public class MemberService {
         }
     }
 
-   public void update() {
-
-            System.out.print("수정할 이메일: ");
-            String mEmail = scanner.next();
-
-            System.out.print("수정할 비밀번호: ");
-            String mPassword = scanner.next();
-
-            MemberDTO memberDTO = memberRepository.findById(mEmail, mPassword);
-
-            if (memberDTO == null) {
-                System.out.println("해당 정보가 없습니다");
+    public void update() {
+        if (loginEmail == null) {
+            System.out.println("로그인 해주세요");
+        } else {
+            System.out.print("수정 전화번호: ");
+            String updateMobile = scanner.next();
+            boolean result = memberRepository.update(loginEmail, updateMobile);
+            if (result) {
+                System.out.println("수정 완료");
             } else {
-                System.out.print("변경할 전화번호:   ");
-                String mobile = scanner.next();
-                memberRepository.update(mEmail, mPassword, mobile);
+                System.out.println("수정 실패");
             }
         }
+    }
 
         public void logout () {
             System.out.println("아이디:  "+ loginEmail + "  로그아웃");

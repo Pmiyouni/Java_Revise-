@@ -61,13 +61,14 @@ public class MemberRepository {
     }
 
 
-    public void update(String mEmail, String mPassword, String mobile) {
-        for (MemberDTO memberDTO : memberDTOList) {
-            if (mEmail.equals(memberDTO.getMemberEmail()) && mPassword.equals(memberDTO.getMemberPassword())) {
-                memberDTO.setMemberMobile(mobile);
-//System.out.println("memberDTO = " + memberDTO);
+    public boolean update(String loginEmail, String updateMobile) {
+        for (MemberDTO memberDTO: memberDTOList) {
+            if (loginEmail.equals(memberDTO.getMemberEmail())) {
+                memberDTO.setMemberMobile(updateMobile);
+                return true;
             }
         }
+        return false;
     }
 }
 
