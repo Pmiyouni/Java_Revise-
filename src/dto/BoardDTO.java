@@ -16,7 +16,6 @@ public class BoardDTO {
 
     }
 
-
     public BoardDTO(String boardTitle, String boardWriter, String boardContents, String boardPass) {
         this.id = num++;
         this.boardTitle = boardTitle;
@@ -24,6 +23,7 @@ public class BoardDTO {
         this.boardContents = boardContents;
         this.boardPass = boardPass;
     }
+
 
     public Long getId() {
         return id;

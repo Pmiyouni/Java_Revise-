@@ -22,10 +22,10 @@ public class MainClass {
                 boardService.save();
             } else  if (sel == 2) {
                 System.out.println("글목록 메뉴");
-                boardService.findById();
+                boardService.findAll();
             } else if (sel == 3) {
                 System.out.println("글조회 메뉴");
-                boardService.findAll();
+                boardService.findById();
             } else if (sel == 4) {
                 System.out.println("글수정 메뉴");
                 boardService.update();
