@@ -11,11 +11,8 @@ public class BoardService {
     Scanner scanner = new Scanner(System.in);
     BoardRepository boardRepository = new BoardRepository();
 
-    int hits = 0;
-
     //글 작성
     public void save() {
-
         System.out.print("제목: ");
         String boardTitle = scanner.next();
         System.out.print("작성자: ");
@@ -39,8 +36,6 @@ public class BoardService {
         long id = scanner.nextLong();
         BoardDTO boardDTO= boardRepository.findById(id);
         //System.out.println(boardDTO.toString());
-
-
         if (boardDTO != null) {
             boardDTO.setBoardHits(boardDTO.getBoardHits()+1);
             System.out.println("글번호 : " + boardDTO.getId());
@@ -90,7 +85,7 @@ public class BoardService {
         }
     }
 
-
+    //검색
     public void search() {
         System.out.print("검색할 제목 입력:  ");
         String title = scanner.next();
