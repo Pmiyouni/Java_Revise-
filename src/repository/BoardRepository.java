@@ -4,8 +4,10 @@ import dto.BoardDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BoardRepository {
+    Scanner scanner = new Scanner(System.in);
     List<BoardDTO> boardDTOList = new ArrayList<>();
 
     //글작성
@@ -23,17 +25,34 @@ public class BoardRepository {
         return null;
     }
 
+    //조회수 증가
+    public boolean boardHits(long findID){
+        for(BoardDTO boardDTO : boardDTOList){
+            if(findID == boardDTO.getId()){
+                int hits = boardDTO.getBoardHits();
+                hits = hits + 1;
+                boardDTO.setBoardHits(hits);
+                // boardDTO.setBoardHits(boardDTO.getBoardHits() + 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
     //검색
     public List<BoardDTO> search(String title) {
 
-        List<BoardDTO> boardDTOList1 = new ArrayList<>();
+        List<BoardDTO> searchList = new ArrayList<>();
         for (BoardDTO boardDTO : boardDTOList) {
             if (title.equals(boardDTO.getBoardTitle())) {
-                boardDTOList1.add(boardDTO);
+                searchList.add(boardDTO);
             }
         }
-        return boardDTOList1;
+        return searchList;
     }
+
+
+
 
 
     //글목록

@@ -13,7 +13,7 @@ public class MainClass {
         boolean run = true;
         while (run) {
             System.out.println("\n====== 게  시  판 ======");
-            System.out.println("1. 글작성 2.글목록 3.글조회 4.글수정 5.글삭제 6. 검색  0.종료");
+            System.out.println("1. 글작성 2.글목록 3.글조회 4.글수정 5.글삭제 6. 검색 7. 샘플데이터  0.종료");
             System.out.print("선택>  ");
             int sel = scanner.nextInt();
             if (sel == 1) {
@@ -36,7 +36,10 @@ public class MainClass {
             } else if (sel == 6) {
                 System.out.println("검색 메뉴");
                 boardService.search();
-            }  else if (sel == 0) {
+            } else if (sel == 7) {
+                boardService.sampleData();
+                System.out.println("샘플데이터 작성완료 ");
+            } else if (sel == 0) {
                 System.out.println("종료");
                 run = false;
             }

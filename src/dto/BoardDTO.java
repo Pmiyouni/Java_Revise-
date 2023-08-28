@@ -84,4 +84,7 @@ public class BoardDTO {
                 ", boardHits=" + boardHits +
                 '}';
     }
+    public void print() {
+        System.out.println(id + "\t" + boardTitle + "\t" + boardWriter + "\t" + boardHits + "\t");
+    }
 }

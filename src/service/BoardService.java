@@ -33,19 +33,22 @@ public class BoardService {
 
     //글조회
     public void findById() {
-        System.out.print("조회할 id: ");
-        Long id = scanner.nextLong();
-        BoardDTO boardDTO = boardRepository.findById(id);
-        //System.out.println(boardDTO.toString());
-        if (boardDTO != null) {
-            boardDTO.setBoardHits(boardDTO.getBoardHits() + 1);
+        findAll();
+        System.out.println("===== 조회 화면 =====");
+        System.out.print("조회할 id 입력: ");
+        long id = scanner.nextLong();
+
+        boolean result = boardRepository.boardHits(id);
+
+        if (result) {
+            BoardDTO boardDTO = boardRepository.findById(id);
             System.out.println("글번호 : " + boardDTO.getId());
             System.out.println("제목 : " + boardDTO.getBoardTitle());
             System.out.println("작성자 : " + boardDTO.getBoardWriter());
             System.out.println("조회수 : " + boardDTO.getBoardHits() + " 회");
             System.out.println("내용 : " + boardDTO.getBoardContents());
         } else {
-            System.out.println("찾는 글이 없습니다");
+            System.out.println("요청하신 게시글이 없습니다!");
         }
     }
 
@@ -62,10 +65,11 @@ public class BoardService {
         }
     }
 
+
     //글수정
     public void update() {
         System.out.print("수정할 id 입력:  ");
-        Long id = scanner.nextLong();
+        long id = scanner.nextLong();
         System.out.print("비밀번호 입력:  ");
         String password = scanner.next();
 
@@ -76,6 +80,7 @@ public class BoardService {
                 String title = scanner.next();
                 System.out.print("수정할 내용 입력:   ");
                 String contents = scanner.next();
+
                 boolean result = boardRepository.update(id, title, contents);
                 if (result) {
                     System.out.println("수정 완료");
@@ -83,10 +88,10 @@ public class BoardService {
                     System.out.println("수정 실패");
                 }
             } else {
-                System.out.println("비밀번호 오류");
+                System.out.println("비밀번호가 일치하지않습니다!");
             }
         } else {
-            System.out.println("해당 내용이 없습니다");
+            System.out.println("요청하신 게시글이 없습니다");
         }
     }
 
@@ -95,16 +100,18 @@ public class BoardService {
         System.out.print("검색할 제목 입력:  ");
         String title = scanner.next();
 
-        List<BoardDTO> boardDTOList1 = boardRepository.search(title);
+        List<BoardDTO> searchList = boardRepository.search(title);
         //if(boardDTOList1.isEmpty()) {
-          if(boardDTOList1.size() == 0){
-            System.out.println("해당 내용이 없습니다");
-        } else {
-            for (BoardDTO boardDTO : boardDTOList1) {
-                System.out.println("글번호 : " + boardDTO.getId() + "   작성자 : " + boardDTO.getBoardWriter());
-                System.out.println(boardDTO.getBoardContents());
+        if (searchList.size() == 0) {
+            System.out.println("요청하신 게시글이 없습니다");
+        } else {  // if (boardDTOList1.size() > 0)
+            for (BoardDTO boardDTO : searchList) {
+                System.out.println(" 검색 결과");
+//                System.out.println("글번호 : " + boardDTO.getId() + "   작성자 : " + boardDTO.getBoardWriter());
+//                System.out.println(boardDTO.getBoardContents());
                 System.out.println("-----------------------------------");
-
+                   boardDTO.print();
+                      // print()를 DTO에 작성해둠
             }
         }
     }
@@ -112,8 +119,8 @@ public class BoardService {
 
     //글삭제
     public void delete() {
-        System.out.print("삭제할 id 입력:  ");
-        Long id = scanner.nextLong();
+        System.out.print("삭제할 글번호 입력:  ");
+        long id = scanner.nextLong();
         System.out.print("비밀번호 입력:  ");
         String password = scanner.next();
 
@@ -123,10 +130,18 @@ public class BoardService {
                 boardRepository.delete(id);
                 System.out.println("삭제 완료");
             } else {
-                System.out.println("비밀번호 오류");
+                System.out.println("비밀번호가 일치하지않습니다!");
             }
         } else {
-            System.out.println("해당 정보가 없습니다");
+            System.out.println("요청하신 게시글이 없습니다");
+        }
+    }
+
+    //샘플데이터 생성
+    public void sampleData() {
+        for(int i=1; i<=10; i++){
+            BoardDTO boardDTO = new BoardDTO( "title"+i, "writer"+i,"contents"+i,"pass"+i );
+            boardRepository.save(boardDTO);
         }
     }
 }
