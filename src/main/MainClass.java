@@ -13,7 +13,7 @@ public class MainClass {
 
         boolean run = true;
         while (run) {
-            System.out.println("====== 게  시  판 ======");
+            System.out.println("\n====== 게  시  판 ======");
             System.out.println("1. 글작성 2.글목록 3.글조회 4.글수정 5.글삭제 6. 검색  0.종료");
             System.out.print("선택>  ");
             int sel = scanner.nextInt();
