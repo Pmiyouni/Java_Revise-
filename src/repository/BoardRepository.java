@@ -25,14 +25,14 @@ public class BoardRepository {
 
     //검색
     public List<BoardDTO> search(String title) {
+
         List<BoardDTO> boardDTOList1 = new ArrayList<>();
         for (BoardDTO boardDTO : boardDTOList) {
             if (title.equals(boardDTO.getBoardTitle())) {
                 boardDTOList1.add(boardDTO);
             }
         }
-        if (boardDTOList1 != null) return boardDTOList1;
-        else return null;
+        return boardDTOList1;
     }
 
 
@@ -56,7 +56,7 @@ public class BoardRepository {
     //삭제
     public void delete(Long id) {
         for (BoardDTO boardDTO : boardDTOList) {
-            if (id == boardDTO.getId()) {
+            if (id.equals(boardDTO.getId())) {
                 boardDTOList.remove(boardDTO);
 
             }

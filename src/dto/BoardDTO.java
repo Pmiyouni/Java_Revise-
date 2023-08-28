@@ -8,7 +8,7 @@ public class BoardDTO {
     private String boardContents;
     private String boardPass;
 
-    private int boardHits;
+    private int boardHits = 0;
 
     private static long num = 1L;
 

@@ -96,14 +96,16 @@ public class BoardService {
         String title = scanner.next();
 
         List<BoardDTO> boardDTOList1 = boardRepository.search(title);
-        if (boardDTOList1 != null) {
+        //if(boardDTOList1.isEmpty()) {
+          if(boardDTOList1.size() == 0){
+            System.out.println("해당 내용이 없습니다");
+        } else {
             for (BoardDTO boardDTO : boardDTOList1) {
                 System.out.println("글번호 : " + boardDTO.getId() + "   작성자 : " + boardDTO.getBoardWriter());
                 System.out.println(boardDTO.getBoardContents());
-                System.out.println("==============================");
+                System.out.println("-----------------------------------");
+
             }
-        } else {
-            System.out.println("해당 내용이 없습니다");
         }
     }
 

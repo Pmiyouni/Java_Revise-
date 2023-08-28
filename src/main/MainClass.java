@@ -8,7 +8,6 @@ import java.util.*;
 public class MainClass {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        BoardDTO boardDTO = new BoardDTO();
         BoardService boardService = new BoardService();
 
         boolean run = true;
@@ -20,6 +19,8 @@ public class MainClass {
             if (sel == 1) {
                 System.out.println("글작성 메뉴");
                 boardService.save();
+                BoardDTO boardDTO = new BoardDTO();
+                System.out.println("boardDTO = " + boardDTO);
             } else  if (sel == 2) {
                 System.out.println("글목록 메뉴");
                 boardService.findAll();
