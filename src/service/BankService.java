@@ -115,7 +115,7 @@ public class BankService {
             System.out.println("없는 계좌번호 입니다.");
         }
     }
-    
+
     //입출금 내역조회
     public void findAll() {
         AccountDTO accountDTO = new AccountDTO();
@@ -139,20 +139,20 @@ public class BankService {
             System.out.print("선택>  ");
             int sel = scanner.nextInt();
             if (sel == 1) {
-                int balance=0;
+                int balance = 0;
                 System.out.println("전체내역 메뉴");
                 List<AccountDTO> bankingList = bankRepository.bankingList(account);
                 for (AccountDTO accountDTO : bankingList) {
                     System.out.println(" 전체 입출금 내역");
                     System.out.println("-------------------------------------------------------");
-                    System.out.println("id=" + accountDTO.getId()+"\t"+
+                    System.out.println("id=" + accountDTO.getId() + "\t" +
                             " 계좌번호 : " + accountDTO.getAccountNumber() + "\t" +
-                            " 입금액 : " + accountDTO.getDeposit() + "\t"+
-                            " 출금액 : " + accountDTO.getWithdraw() + "\t"+
-                            " 입출금발생시간: " + accountDTO.getBankingAt() );
+                            " 입금액 : " + accountDTO.getDeposit() + "\t" +
+                            " 출금액 : " + accountDTO.getWithdraw() + "\t" +
+                            " 입출금발생시간: " + accountDTO.getBankingAt());
                     balance = balance + accountDTO.getBalance();
                 }
-                System.out.println(" 잔액 : " + balance );
+                System.out.println(" 잔액 : " + balance);
             } else if (sel == 2) {
 
                 boolean checkResult = bankRepository.checkAccount(account);
@@ -165,11 +165,11 @@ public class BankService {
                         for (AccountDTO accountDTO : inList) {
                             System.out.println(" 입금내역");
                             System.out.println("---------------------------------------------------");
-                            System.out.println("id=" + accountDTO.getId()+"\t"+
+                            System.out.println("id=" + accountDTO.getId() + "\t" +
                                     " 계좌번호 : " + accountDTO.getAccountNumber() + "\t" +
-                                    " 입금액 : " + accountDTO.getDeposit() + "\t"+
-                                    " 입금발생시간: " + accountDTO.getBankingAt() );
-                    }
+                                    " 입금액 : " + accountDTO.getDeposit() + "\t" +
+                                    " 입금발생시간: " + accountDTO.getBankingAt());
+                        }
                     }
 
                 } else {
@@ -189,24 +189,76 @@ public class BankService {
                         for (AccountDTO accountDTO : outList) {
                             System.out.println(" 출금내역");
                             System.out.println("----------------------------------------------");
-                            System.out.println("id=" + accountDTO.getId()+"\t"+
+                            System.out.println("id=" + accountDTO.getId() + "\t" +
                                     " 계좌번호 : " + accountDTO.getAccountNumber() + "\t" +
-                                    " 출금액 : " + accountDTO.getWithdraw() + "\t"+
-                                    " 출금발생시간: " + accountDTO.getBankingAt() );
+                                    " 출금액 : " + accountDTO.getWithdraw() + "\t" +
+                                    " 출금발생시간: " + accountDTO.getBankingAt());
                         }
                     }
                 } else {
                     System.out.println("없는 계좌번호 입니다.");
                 }
 
-                } else if (sel == 4) {
-                    System.out.println("메인으로 이동");
-                    run = false;
-                }
+            } else if (sel == 4) {
+                System.out.println("메인으로 이동");
+                run = false;
             }
-
         }
     }
+
+        //게좌조회
+    public void accoutFind() {
+        System.out.print("계좌번호 입력 :  ");
+        String account = scanner.next();
+        boolean checkResult = bankRepository.checkAccount(account);
+        if (!checkResult) {
+            ClientDTO clientDTO = bankRepository.findByAccount(account);
+            if (clientDTO != null) {
+                 clientDTO.print();
+            } else {
+                System.out.println("해당정보가 없습니다");
+            }
+        }else{
+                System.out.println("없는 계좌번호 입니다.");
+            }
+        }
+
+    //비밀번호 변경
+    public void updataPassword() {
+        System.out.print("계좌번호 입력 :  ");
+        String account = scanner.next();
+
+        boolean checkResult = bankRepository.checkAccount(account);
+        if (!checkResult) {
+            ClientDTO clientDTO = bankRepository.findByAccount(account);
+            if (clientDTO !=null) {
+                System.out.print("비밀번호 입력 :  ");
+                String password = scanner.next();
+                if(password.equals(clientDTO.getClientPass())) {
+                    System.out.print("새로운 비밀번호 입력 :  ");
+                    String newPassword = scanner.next();
+                    clientDTO.setClientPass(newPassword);
+                    System.out.println("비밀번호 변경 완료");
+                }else{
+                    System.out.println("비밀번호가 틀렸습니다");
+                }
+            } else {
+                System.out.println("해당정보가 없습니다.");
+            }
+        } else{
+            System.out.println("없는 계좌번호 입니다.");
+        }
+    }
+
+        //샘플데이터 생성
+    public void sampleData() {
+        for(int i=1; i<=10; i++){
+            ClientDTO clientDTO0 = new ClientDTO( "name"+i, "num"+i,"pass"+i,"2023-1-1");
+            bankRepository.accountInsert(clientDTO0);
+            System.out.println("clientDTO0 = " + clientDTO0);
+        }
+    }
+}
 
 
 

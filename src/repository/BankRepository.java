@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.SplittableRandom;
 import java.util.concurrent.Callable;
 
-public class BankRepository {
+public class    BankRepository {
     List<ClientDTO> clientDTOList = new ArrayList<>();
     List<AccountDTO> accountDTOList = new ArrayList<>();
     ClientDTO clientDTO = new ClientDTO();

@@ -81,5 +81,8 @@ public class ClientDTO {
                 ", balance=" + balance +
                 '}';
     }
+    public void print(){
+        System.out.printf("%d %s %s %s %d",id,clientName,accountNumber,clientCreatedAt,balance);
+    }
 }
 
