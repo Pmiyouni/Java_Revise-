@@ -200,7 +200,7 @@ public class BankService {
                 }
 
                 } else if (sel == 4) {
-                    System.out.println("종료");
+                    System.out.println("메인으로 이동");
                     run = false;
                 }
             }
