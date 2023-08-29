@@ -3,13 +3,13 @@ package dto;
 public class AccountDTO {
     private Long id;
     private String accountNumber; //계좌번호
-    private long deposit =0L; //입금액
-    private long withdraw =0L; //출금액
+    private int deposit =0; //입금액
+    private int  withdraw =0; //출금액
 
     private String bankingAt;
 
 
-    private static long num = 1L;
+   // private static long num = 1L;
 
     public AccountDTO() {
     }
@@ -22,9 +22,9 @@ public class AccountDTO {
 //        this.balance = balance;
 //    }
 
-//    public long getBalance() {
-//           return deposit - withdraw;
-//      }
+    public int getBalance() {
+           return deposit - withdraw;
+      }
 
     public Long getId() {
         return id;
@@ -42,19 +42,19 @@ public class AccountDTO {
         this.accountNumber = accountNumber;
     }
 
-    public long getDeposit() {
+    public int getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(long deposit) {
+    public void setDeposit(int deposit) {
         this.deposit = deposit;
     }
 
-    public long getWithdraw() {
+    public int getWithdraw() {
         return withdraw;
     }
 
-    public void setWithdraw(long withdraw) {
+    public void setWithdraw(int withdraw) {
         this.withdraw = withdraw;
     }
 
@@ -76,24 +76,6 @@ public class AccountDTO {
                 ", bankingAt='" + bankingAt + '\'' +
                 '}';
     }
-    public String print1() {
-        return "AccountDTO{" +
-                "id=" + id +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", deposit=" + deposit +
-                ", bankingAt='" + bankingAt + '\'' +
-                '}';
-    }
-    public String print2() {
-        return "AccountDTO{" +
-                "id=" + id +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", withdraw=" + withdraw +
-                ", bankingAt='" + bankingAt + '\'' +
-                '}';
-    }
-
-
 }
 
 

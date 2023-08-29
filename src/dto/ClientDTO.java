@@ -7,7 +7,7 @@ public class ClientDTO {
 
     private String clientPass; //계좌비밀번호
     private String clientCreatedAt; //가입일자
-    private long balance=0L;  //잔고
+    private int balance= 0;  //잔고
 
     private static long num = 1L;
 
@@ -62,11 +62,11 @@ public class ClientDTO {
         this.clientCreatedAt = clientCreatedAt;
     }
 
-    public long getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -82,3 +82,4 @@ public class ClientDTO {
                 '}';
     }
 }
+

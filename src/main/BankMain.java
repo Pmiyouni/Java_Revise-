@@ -12,7 +12,7 @@ public class BankMain {
         boolean run = true;
         while (run) {
             System.out.println("\n====== 은행 프로젝트 ======");
-            System.out.println("1. 신규계좌 등록 2. 잔액조회  3.입금 4.출금 5.입출금 내역 조회 0.종료");
+            System.out.println("1. 신규계좌 등록 2. 잔액조회  3.입금  4.출금 5.입출금 내역 조회 0.종료");
             System.out.print("선택>  ");
             int sel = scanner.nextInt();
             if (sel == 1) {

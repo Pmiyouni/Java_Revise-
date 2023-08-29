@@ -11,8 +11,8 @@ import java.util.concurrent.Callable;
 public class BankRepository {
     List<ClientDTO> clientDTOList = new ArrayList<>();
     List<AccountDTO> accountDTOList = new ArrayList<>();
-    List<AccountDTO> outlist = new ArrayList<>();
-    List<AccountDTO> inlist = new ArrayList<>();
+
+
 
     ClientDTO clientDTO = new ClientDTO();
 
@@ -42,87 +42,67 @@ public class BankRepository {
     }
 
 
-    public void depositAccount(long cnt, String inAccount, long inMoney, String bankingAt) {
-
-
+    public void depositAccount(long cnt, String inAccount, int inMoney, String bankingAt) {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setId(cnt);
         accountDTO.setAccountNumber(inAccount);
         accountDTO.setDeposit(inMoney);
         accountDTO.setBankingAt(bankingAt);
-        inlist.add(accountDTO);
+        accountDTOList.add(accountDTO);
 
 
     }
 
 
-    public void withdrawAccount(long cnt, String outAccount, long outMoney, String bankingAt) {
-
-
+    public void withdrawAccount(long cnt, String outAccount, int outMoney, String bankingAt) {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setId(cnt);
         accountDTO.setAccountNumber(outAccount);
         accountDTO.setWithdraw(outMoney);
         accountDTO.setBankingAt(bankingAt);
-        outlist.add(accountDTO);
-
-
-
+        accountDTOList.add(accountDTO);
     }
 
 
     public AccountDTO findBalance(String account) {
-
         for (AccountDTO accountDTO : accountDTOList) {
-            if (account.equals(accountDTO.getAccountNumber()))
+            if (account.equals(accountDTO.getAccountNumber())){
                 return accountDTO;
-        }
+             }
+         }
         return null;
-
     }
 
-    public List<AccountDTO> bankingList() {
-        List<AccountDTO> banklist = new ArrayList<>();
-        for(AccountDTO accountDTO: inlist) {
-            banklist.add(accountDTO);
-
-        }
-        for(AccountDTO accountDTO: outlist) {
-            banklist.add(accountDTO);
-        }
-        return banklist;
-    }
-
-    public List<AccountDTO> inBankingList(String account) {
-        List<AccountDTO> accountDTOList1 = new ArrayList<>();
-        for (AccountDTO accountDTO : inlist) {
-            if (account.equals(accountDTO.getAccountNumber())) {
-                accountDTOList1.add(accountDTO);
-                return accountDTOList1;
+    public List<AccountDTO> bankingList(String account) {
+        List<AccountDTO> allList = new ArrayList<>();
+        for (AccountDTO accountDTO : accountDTOList) {
+           if (account.equals(accountDTO.getAccountNumber())) {
+               allList.add(accountDTO);
             }
         }
-        return null;
+        return allList;
+    }
+
+
+
+    public List<AccountDTO> inBankingList(String account) {
+        List<AccountDTO> inList = new ArrayList<>();
+        for (AccountDTO accountDTO : accountDTOList) {
+            if (account.equals(accountDTO.getAccountNumber()) && accountDTO.getWithdraw() == 0) {
+                inList.add(accountDTO);
+            }
+        }
+        return inList;
     }
 
         public List<AccountDTO> outBankingList(String account){
-            List<AccountDTO> accountDTOList2 = new ArrayList<>();
-            for (AccountDTO accountDTO : outlist) {
-                if (account.equals(accountDTO.getAccountNumber())) {
-                    accountDTOList2.add(accountDTO);
-                    return accountDTOList2;
-                }
+            List<AccountDTO> outList = new ArrayList<>();
+             for (AccountDTO accountDTO : accountDTOList) {
+                if (account.equals(accountDTO.getAccountNumber()) && accountDTO.getDeposit() == 0) {
+                    outList.add(accountDTO);
+                  }
             }
-            return null;
+            return outList;
         }
 
     }
-
-
-
-
-
-
-
-
-
-
